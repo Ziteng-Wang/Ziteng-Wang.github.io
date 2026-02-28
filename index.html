@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王紫滕的个人主页</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@5.5.1/github-markdown.min.css">
+    <style>
+        /* --- 全局设置 --- */
+        body {
+            /* 给整个页面一个浅灰色背景，营造层次感 */
+            background-color: #f4f6f9;
+            /* 使用现代无衬线字体栈 */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            margin: 0;
+            padding: 20px 0; /* 上下给予一定空间 */
+        }
+
+        /* 覆盖 markdown-body 的默认设置，提升阅读体验 */
+        .markdown-body {
+            box-sizing: border-box;
+            font-size: 17px; /* 【核心修改：调大基础字号】 */
+            line-height: 1.7; /* 增加行高，阅读更舒适 */
+            color: #2d3748; /* 使用柔和的深灰色代替纯黑 */
+        }
+
+        /* --- 核心容器：卡片式设计 --- */
+        .container {
+            /* 限制宽度为 1024px，比之前的1200px更窄，阅读体验更好，视觉更居中 */
+            max-width: 1024px;
+            margin: 0 auto; /* 水平居中 */
+            background-color: #ffffff; /* 白色卡片背景 */
+            padding: 3rem 4rem; /* 增加内部留白，更有呼吸感 */
+            border-radius: 12px; /* 圆角 */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); /* 添加柔和的阴影，使卡片浮起 */
+        }
+
+        /* --- 链接样式 --- */
+        .markdown-body a {
+            color: #3182ce; /* 更现代的蓝色 */
+            text-decoration: none;
+        }
+        .markdown-body a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- 标题样式 --- */
+        .markdown-body h1, .markdown-body h2, .markdown-body h3 {
+            border-bottom: none; /* 移除默认的下划线 */
+            color: #1a202c; /* 标题颜色更深 */
+        }
+
+        .markdown-body h2 {
+            font-size: 1.8rem;
+            margin-top: 2.5rem; /* 区块间增加更多间距 */
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            /* 给 H2 加上一个现代的底部装饰线 */
+            border-bottom: 3px solid #e2e8f0;
+            display: inline-block; /* 让下划线只包裹文字长度 */
+            color: #2c5282; /* 专业的深蓝色标题 */
+        }
+        
+        .markdown-body h3 {
+            font-size: 1.4rem;
+            margin-top: 1.5rem;
+            color: #2d3748;
+        }
+
+        /* --- 头部区域 (Header) --- */
+        .header-container {
+            display: flex;
+            align-items: center;
+            gap: 3rem; /* 增加头像和信息的间距 */
+            padding-bottom: 3rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid #e2e8f0; /* 将分割线移到头部下方 */
+            flex-wrap: wrap;
+        }
+
+        .avatar {
+            width: 180px; /* 稍微调大头像 */
+            height: 180px;
+            /* 修改为圆形头像，更具亲和力 */
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #fff; /* 加一个白色边框环 */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12); /* 更明显的阴影 */
+        }
+
+        .info-container {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .info-container h1 {
+            margin: 0 0 1rem 0;
+            font-size: 2.5rem; /* 增大名字字号 */
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .info-container ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 1.05rem; /* 头部信息字号微调 */
+        }
+
+        .info-container li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        /* 移除之前的自定义圆点，保持整洁 */
+        .info-container li::before {
+            display: none;
+        }
+
+        /* --- 内容区域优化 --- */
+        .content-section {
+            /* 移除原有的 border-top，改用 margin 分隔 */
+            margin: 0; 
+            padding-top: 0;
+        }
+
+        /* 优化列表项间距 */
+        .markdown-body ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* 针对主要经历的列表项，增加段落间距 */
+        .content-section > ul > li {
+             margin-bottom: 1.2rem;
+        }
+
+        /* --- 嵌套列表优化 (重要) --- */
+        /* 让嵌套的有序列表看起来更像一个独立的块 */
+        .markdown-body .content-section ol {
+            background-color: #f8fafc; /* 浅灰色背景强调 */
+            padding: 1rem 1rem 1rem 2.5rem;
+            border-radius: 8px;
+            margin-top: 0.8rem;
+            border: 1px solid #edf2f7;
+        }
+        .markdown-body .content-section ol li {
+            margin-bottom: 0.4rem;
+            font-size: 0.95em; /* 嵌套内容字体稍微小一点点 */
+        }
+
+        /* --- 强调文字优化 --- */
+        .markdown-body strong {
+            color: #1a202c;
+            font-weight: 600;
+        }
+
+        /* --- 移动端适配 --- */
+        @media (max-width: 768px) {
+            body {
+                padding: 0; /* 移动端去掉背景边距 */
+            }
+            .container {
+                padding: 2rem 1.5rem; /* 减少内边距 */
+                border-radius: 0; /* 移动端铺满，去掉圆角和阴影 */
+                box-shadow: none;
+            }
+            .header-container {
+                justify-content: center;
+                text-align: center;
+                flex-direction: column; /* 头像和信息上下排列 */
+                gap: 1.5rem;
+                padding-bottom: 2rem;
+                margin-bottom: 2rem;
+            }
+            .avatar {
+                width: 150px;
+                height: 150px;
+            }
+            .info-container ul li {
+                justify-content: center; /* 信息居中对齐 */
+            }
+             /* 移动端 H2 标题不需要 inline-block 下划线样式，恢复默认 */
+            .markdown-body h2 {
+                display: block;
+                border-bottom: 2px solid #e2e8f0;
+                text-align: center; /* 标题居中 */
+            }
+        }
+    </style>
+</head>
+<body class="markdown-body">
+<div class="container">
+    <div class="header-container">
+        <img src="./images/photo.jpg" alt="王紫滕的头像" class="avatar">
+        <div class="info-container">
+            <h1>王紫滕</h1>
+            <ul>
+                <li>邮箱：<a href="mailto:2233711359@stu.xjtu.edu.cn">2233711359@stu.xjtu.edu.cn</a></li>
+                <li>电话/微信：<a href="tel:+8613258905505">+86 13258905505</a></li>
+                <li>学校：西安交通大学 | 软件工程（本科）</li>
+                <li>年级：2023级（预计2027年毕业）</li>
+                <li>绩点：91.8（排名：6/135）</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <h2>📚 教育经历</h2>
+        <ul>
+            <li><strong>西安交通大学</strong> | 本科生 | 软件工程</li>
+            <li>时间：2023.09 -- 2027.06（预计）</li>
+            <li>大二智育成绩：91.8，排名：6/135</li>
+        </ul>
+    </div>
+
+    <div class="content-section">
+        <h2>💼 实习经历</h2>
+        <ul>
+            <li>
+                <strong>华为 2012 实验室 - 编译器实验室</strong> | 软件开发工程师（实习生）
+                <br>
+                <span style="color: #718096; font-size: 0.9em;">时间：2025.8 -- 2025.9</span>
+                <div style="margin-top: 0.8rem;"><strong>工作职责：</strong></div>
+                <ol>
+                    <li>参与性能优化项目，针对编译器 SPEC 子项进行性能调优，分析运行瓶颈并优化关键路径；</li>
+                    <li>通过 Python 脚本实现自动化性能测试（一键构建、执行、数据采集与报告生成）；</li>
+                    <li>Linux 环境下使用性能分析工具，定位高 CPU 占用、低缓存命中率等问题；</li>
+                    <li>优化性能数据存储与分析流程，自动生成可视化图表辅助团队评估效果；</li>
+                    <li>跨团队协作，保障优化版本在多平台的功能正确性与性能稳定性。</li>
+                </ol>
+                <div style="margin-top: 0.8rem;">
+                    <strong>工作成果：</strong>参与 dev-19x 项目，x264 子项性能提升 9%，Python 子项性能提升 7%。
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="content-section">
+        <h2>🚀 项目经历</h2>
+        
+        <h3>基于香橙派的疲劳驾驶检测与预警系统</h3>
+        <ul>
+            <li>项目类型：国家级大学生创新创业项目 | 角色：项目负责人</li>
+            <li>时间：2025.5 -- 2026.5（预计）</li>
+            <li><strong>研究背景：</strong>解决传统疲劳检测延迟高、部署成本高的问题，探索低成本嵌入式平台的实时检测方案。</li>
+            <li><strong>研究方法：</strong>香橙派部署轻量化 YOLOv5 模型，实时追踪驾驶员面部关键区域；结合语音模块预警，采用公开数据集+迁移学习，ONNX 格式适配嵌入式设备。</li>
+            <li><strong>阶段成果：</strong>基于 YOLOv5m 预训练模型完成训练与 ONNX 导出，验证集 mAP@0.5 达 95.96%，当前进行嵌入式部署与性能验证。</li>
+            <li><strong>承担工作：</strong>项目总体设计与管理、文献调研、模型改进与训练、实验评估与技术报告撰写。</li>
+        </ul>
+
+        <h3 style="margin-top: 2.5rem;">音乐推荐系统</h3>
+        <ul>
+            <li>项目类型：开发项目 | 角色：核心小组成员</li>
+            <li>时间：2025.7 -- 2025.7</li>
+            <li><strong>项目简介：</strong>基于 Web 的音乐推荐平台，支持用户管理、歌曲检索/播放/上传，前后端分离架构提升扩展性与维护效率。</li>
+            <li><strong>承担工作（全栈开发）：</strong>
+                <ol>
+                    <li>设计实现系统架构（Vue3 + Spring Boot + MySQL）；</li>
+                    <li>开发用户交互界面与核心后端服务，保障功能稳定与性能优化；</li>
+                    <li>使用 Git/GitHub 进行代码托管与协作开发。</li>
+                </ol>
+            </li>
+            <li><strong>项目成果：</strong>完成核心模块开发，实现系统全部主要功能。</li>
+        </ul>
+    </div>
+
+    <div class="content-section">
+        <h2>🏆 所获表彰</h2>
+        <ul>
+            <li>学生荣誉：优秀学生、文治书院团委实践部优秀干事</li>
+            <li>奖学金：国家励志奖学金</li>
+        </ul>
+    </div>
+
+    <div class="content-section">
+        <h2>🛠️ 专业技能</h2>
+        <ul>
+            <li><strong>技术栈：</strong>Python, C++, Shell, Java, VUE, Spring Boot, Maven, MySQL</li>
+            <li><strong>开发工具与框架：</strong>Git, PyCharm, Kaggle, IntelliJ IDEA, VS Code, MySQL Workbench, Docker</li>
+            <li><strong>知识领域：</strong>机器学习（ML）、计算机视觉（CV）、PyTorch、OpenCV、数据结构与算法、操作系统、离散数学</li>
+            <li><strong>外语能力：</strong>CET-4 551 分，CET-6 468 分，具备英文文献阅读与撰写能力</li>
+        </ul>
+    </div>
+</div> </body>
+</html>

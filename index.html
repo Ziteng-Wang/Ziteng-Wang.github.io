@@ -6,890 +6,691 @@
     <title>王紫滕 | 个人简历</title>
     <style>
         :root {
-            --bg: #ecf2f7;
-            --card: rgba(255, 255, 255, 0.92);
+            --bg-top: #f7fbfc;
+            --bg-bottom: #eef4f7;
+            --surface: rgba(255, 255, 255, 0.94);
+            --surface-strong: #ffffff;
+            --surface-soft: #f7fbfc;
+            --border: #d8e4ea;
             --ink: #1f2937;
-            --muted: #5b677a;
+            --muted: #64748b;
             --accent: #0f766e;
             --accent-strong: #155e75;
-            --accent-soft: #e4f4f2;
-            --line: #dce6ed;
-            --pill: #f7fafc;
-            --shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+            --accent-soft: rgba(15, 118, 110, 0.08);
+            --accent-ring: rgba(21, 94, 117, 0.14);
+            --shadow-lg: 0 20px 48px rgba(15, 23, 42, 0.10);
+            --shadow-sm: 0 10px 24px rgba(15, 23, 42, 0.06);
         }
 
         * {
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             margin: 0;
-            padding: 32px 18px 48px;
+            min-height: 100vh;
             color: var(--ink);
-            line-height: 1.75;
-            background:
-                radial-gradient(circle at top left, #fdfefe 0, #f2f7fb 40%, #ecf2f7 100%);
+            line-height: 1.72;
+            background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
             font-family: "PingFang SC", "Noto Sans SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
 
         a {
             color: inherit;
+            text-decoration: none;
         }
 
-        .page {
-            max-width: 1080px;
+        code {
+            padding: 0.1rem 0.38rem;
+            border-radius: 0.45rem;
+            background: rgba(15, 118, 110, 0.08);
+            color: #0f5d57;
+            font-family: "SFMono-Regular", "Menlo", "Consolas", monospace;
+            font-size: 0.92em;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        .shell {
+            max-width: 1120px;
             margin: 0 auto;
-            background: var(--card);
+            padding: 32px 18px 48px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .panel {
+            background: var(--surface);
             border: 1px solid rgba(148, 163, 184, 0.18);
             border-radius: 28px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-lg);
             backdrop-filter: blur(8px);
         }
 
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 18px 22px 14px;
+        }
+
+        .toolbar-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 7px 12px;
+            border-radius: 999px;
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            color: #466072;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .toolbar-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 42px;
+            padding: 10px 16px;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+        }
+
+        .btn-primary:hover,
+        .btn-secondary:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
+            box-shadow: 0 12px 24px rgba(21, 94, 117, 0.20);
+        }
+
+        .btn-secondary {
+            color: #355066;
+            background: #ffffff;
+            border-color: var(--border);
+        }
+
+        .toolbar-note {
+            margin: 0;
+            padding: 0 22px 20px;
+            color: var(--muted);
+            font-size: 0.86rem;
+        }
+
         .hero {
-            padding: 34px 40px 38px;
-            background:
-                linear-gradient(135deg, rgba(251, 253, 255, 0.98) 0%, rgba(241, 248, 251, 0.98) 56%, rgba(235, 247, 245, 0.98) 100%);
-            border-bottom: 1px solid var(--line);
+            padding: 30px;
         }
 
-        .hero-shell {
-            display: grid;
-            grid-template-columns: 308px minmax(0, 1fr);
+        .hero-top {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
             gap: 24px;
-            align-items: stretch;
         }
 
-        .profile-card {
-            padding: 24px;
-            border-radius: 30px;
-            background: linear-gradient(180deg, rgba(244, 251, 251, 0.96) 0%, #ffffff 68%);
-            border: 1px solid rgba(148, 163, 184, 0.18);
-            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+        .identity {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            min-width: 0;
+        }
+
+        .avatar {
+            width: 124px;
+            height: 124px;
+            flex-shrink: 0;
+            border-radius: 24px;
+            object-fit: cover;
+            border: 4px solid #ffffff;
+            box-shadow: var(--shadow-sm);
         }
 
         .eyebrow {
             margin: 0;
-            font-size: 0.82rem;
+            color: var(--accent-strong);
+            font-size: 0.84rem;
             font-weight: 700;
             letter-spacing: 0.16em;
             text-transform: uppercase;
+        }
+
+        .name {
+            margin: 8px 0 0;
+            font-size: 3rem;
+            line-height: 1.08;
+            letter-spacing: -0.03em;
+        }
+
+        .school {
+            margin: 12px 0 0;
+            color: #425466;
+            font-size: 1.04rem;
+        }
+
+        .intent {
+            margin: 6px 0 0;
+            color: var(--muted);
+            font-size: 0.98rem;
+        }
+
+        .contact-list {
+            display: grid;
+            gap: 12px;
+            min-width: 280px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            color: #314155;
+            font-size: 0.95rem;
+        }
+
+        .contact-item strong {
+            min-width: 80px;
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        .contact-item a {
             color: var(--accent-strong);
         }
 
-        .profile-name {
-            margin: 10px 0 0;
-            font-size: 2.7rem;
-            line-height: 1.05;
-            letter-spacing: 0.02em;
-        }
-
-        .profile-role {
-            margin: 12px 0 0;
-            font-size: 1rem;
-            color: var(--muted);
-        }
-
-        .profile-meta {
-            margin: 10px 0 20px;
-            font-size: 0.92rem;
-            color: #466072;
-        }
-
-        .profile-photo {
-            margin-bottom: 22px;
-            padding: 12px;
-            border-radius: 30px;
-            background: rgba(255, 255, 255, 0.82);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
-        }
-
-        .avatar {
-            display: block;
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            border-radius: 24px;
-            object-fit: cover;
-            box-shadow: 0 18px 36px rgba(15, 23, 42, 0.12);
-        }
-
-        .profile-actions {
-            display: grid;
-            gap: 12px;
-            margin-top: 20px;
-        }
-
-        .action-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 48px;
-            padding: 12px 18px;
-            border-radius: 18px;
-            text-decoration: none;
-            font-size: 0.98rem;
-            font-weight: 700;
-            color: #ffffff;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
-            box-shadow: 0 14px 28px rgba(21, 94, 117, 0.22);
-        }
-
-        .contact-link {
-            display: grid;
-            gap: 2px;
-            padding: 13px 16px;
-            border-radius: 18px;
-            background: rgba(255, 255, 255, 0.92);
-            border: 1px solid #dfe9ef;
-            text-decoration: none;
-            transition: transform 0.18s ease, box-shadow 0.18s ease;
-        }
-
-        .contact-link:hover,
-        .nav-card:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
-        }
-
-        .contact-label {
-            font-size: 0.76rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: #6a7a88;
-        }
-
-        .contact-value {
-            font-size: 0.96rem;
-            font-weight: 600;
-            color: #273547;
-            word-break: break-all;
-        }
-
-        .hero-main {
-            display: grid;
-            gap: 18px;
-        }
-
-        .intro-card,
-        .stats-grid .stat-card,
-        .nav-card {
-            background: rgba(255, 255, 255, 0.84);
-            border: 1px solid rgba(148, 163, 184, 0.16);
-            box-shadow: 0 14px 30px rgba(15, 23, 42, 0.06);
-        }
-
-        .intro-card {
-            padding: 24px 26px;
-            border-radius: 28px;
-        }
-
-        .hero-heading {
-            margin: 10px 0 12px;
-            font-size: 2.15rem;
-            line-height: 1.2;
-            letter-spacing: -0.02em;
-        }
-
-        .subtitle {
-            margin: 0;
-            font-size: 1.03rem;
-            color: var(--muted);
-        }
-
-        .hero-note {
-            margin: 16px 0 0;
-            font-size: 0.96rem;
-            color: #486172;
-        }
-
-        .badge-row,
-        .tag-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 14px;
-        }
-
-        .stats-grid,
-        .nav-grid {
-            display: grid;
-            gap: 14px;
-        }
-
         .stats-grid {
+            margin-top: 22px;
+            display: grid;
+            gap: 14px;
             grid-template-columns: repeat(4, minmax(0, 1fr));
         }
 
         .stat-card {
             padding: 16px 18px;
-            border-radius: 22px;
+            border-radius: 20px;
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
         }
 
         .stat-label {
             margin: 0;
+            color: var(--muted);
             font-size: 0.76rem;
             font-weight: 700;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            color: #6a7a88;
         }
 
         .stat-value {
             margin: 8px 0 0;
-            font-size: 1.04rem;
+            color: #1f2937;
+            font-size: 1.02rem;
             font-weight: 700;
             line-height: 1.45;
-            color: #223041;
         }
 
-        .nav-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-
-        .nav-card {
+        .layout {
             display: grid;
-            gap: 8px;
-            padding: 18px 20px;
-            border-radius: 24px;
-            text-decoration: none;
-            transition: transform 0.18s ease, box-shadow 0.18s ease;
+            gap: 24px;
+            grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
         }
 
-        .nav-card-label {
-            font-size: 0.85rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--accent-strong);
-        }
-
-        .nav-card-title {
-            font-size: 1.06rem;
-            font-weight: 700;
-            color: #233243;
-        }
-
-        .nav-card-desc {
-            font-size: 0.92rem;
-            color: #607082;
+        .stack {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
         }
 
         .section {
-            padding: 34px 56px;
-            border-bottom: 1px solid var(--line);
-        }
-
-        .section:last-child {
-            border-bottom: none;
+            padding: 24px;
         }
 
         .section-title {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin: 0 0 22px;
-            font-size: 1.38rem;
-            font-weight: 700;
-            color: #1f4c5c;
-            letter-spacing: 0.04em;
-        }
-
-        .section-title::before {
-            content: "";
-            width: 10px;
-            height: 10px;
-            border-radius: 999px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
-        }
-
-        .entry {
-            padding: 24px 26px;
-            border: 1px solid #e4edf3;
-            border-radius: 22px;
-            background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
-            box-shadow: 0 14px 30px rgba(15, 23, 42, 0.06);
-        }
-
-        .entry + .entry {
-            margin-top: 18px;
-        }
-
-        .entry-head {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 16px;
-            margin-bottom: 10px;
-        }
-
-        .entry-title {
             margin: 0;
-            font-size: 1.24rem;
-            line-height: 1.35;
+            color: #0f172a;
+            font-size: 1.28rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
         }
 
-        .entry-role {
+        .section-desc {
             margin: 6px 0 0;
             color: var(--muted);
-            font-weight: 600;
-        }
-
-        .entry-date {
-            flex-shrink: 0;
-            padding: 7px 12px;
-            border-radius: 999px;
-            background: var(--accent-soft);
-            color: #115766;
             font-size: 0.92rem;
-            font-weight: 700;
-            white-space: nowrap;
         }
 
-        .badge {
-            min-height: 32px;
-            padding: 6px 11px;
-            background: var(--pill);
-            border: 1px solid #e1eaf0;
-            color: #425466;
-            font-size: 0.88rem;
-        }
-
-        .details {
-            display: grid;
-            gap: 14px;
+        .education-box {
             margin-top: 16px;
+            padding: 18px 20px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: var(--surface-soft);
         }
 
-        .detail {
-            display: grid;
-            grid-template-columns: 104px 1fr;
-            gap: 14px;
-            align-items: start;
+        .education-box p {
+            margin: 0 0 6px;
+            color: #334155;
+            font-size: 0.95rem;
         }
 
-        .detail-label {
-            font-weight: 700;
-            color: #1f4c5c;
-        }
-
-        .detail-content {
-            margin: 0;
-            color: #293648;
-        }
-
-        .detail-content p {
-            margin: 0;
-        }
-
-        .bullet-list,
-        .number-list {
-            margin: 0;
-            padding-left: 1.2rem;
-        }
-
-        .bullet-list li,
-        .number-list li {
-            margin-bottom: 0.52rem;
-        }
-
-        .bullet-list li:last-child,
-        .number-list li:last-child {
+        .education-box p:last-child {
             margin-bottom: 0;
         }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 18px;
+        .education-box p:first-child {
+            color: #0f172a;
+            font-weight: 700;
         }
 
-        .summary-card {
-            padding: 22px 24px;
-            border: 1px solid #e4edf3;
-            border-radius: 20px;
-            background: linear-gradient(180deg, #ffffff 0%, #f9fcfd 100%);
-            box-shadow: 0 12px 26px rgba(15, 23, 42, 0.05);
+        .card-list {
+            margin-top: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
         }
 
-        .summary-card h3 {
-            margin: 0 0 12px;
-            font-size: 1.04rem;
-            color: #1f4c5c;
+        .experience-card {
+            padding: 18px 20px;
+            border-radius: 22px;
+            border: 1px solid var(--border);
+            background: var(--surface-strong);
+            box-shadow: var(--shadow-sm);
         }
 
-        .summary-card p {
+        .experience-head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .experience-title {
             margin: 0;
-            color: #293648;
+            color: #0f172a;
+            font-size: 1.06rem;
+            font-weight: 700;
+            line-height: 1.42;
         }
 
-        .tag-row {
-            gap: 10px;
+        .experience-subtitle {
+            margin: 6px 0 0;
+            color: var(--muted);
+            font-size: 0.92rem;
         }
 
-        .tag {
-            min-height: 34px;
-            padding: 7px 11px;
-            border-radius: 12px;
-            background: #f7fbfc;
-            border: 1px solid #e1ebf0;
-            color: #314155;
-            font-size: 0.9rem;
+        .experience-period {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: var(--surface-soft);
+            color: #466072;
+            font-size: 0.8rem;
+            font-weight: 600;
+            white-space: nowrap;
         }
 
-        @media (max-width: 860px) {
-            body {
-                padding: 0;
+        .experience-points {
+            margin: 14px 0 0;
+            padding-left: 1.18rem;
+            color: #334155;
+            font-size: 0.94rem;
+        }
+
+        .experience-points li {
+            margin-bottom: 0.48rem;
+        }
+
+        .experience-points li:last-child {
+            margin-bottom: 0;
+        }
+
+        .result {
+            margin: 14px 0 0;
+            padding: 12px 14px;
+            border-radius: 16px;
+            background: var(--accent-soft);
+            color: #0f5d57;
+            font-size: 0.92rem;
+            font-weight: 600;
+        }
+
+        .side-list {
+            margin: 16px 0 0;
+            padding-left: 1.18rem;
+            color: #334155;
+            font-size: 0.94rem;
+        }
+
+        .side-list li {
+            margin-bottom: 0.52rem;
+        }
+
+        .side-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .skill-block {
+            margin-top: 16px;
+            display: grid;
+            gap: 12px;
+            color: #334155;
+            font-size: 0.94rem;
+        }
+
+        .skill-block p {
+            margin: 0;
+        }
+
+        .skill-block strong {
+            color: #0f172a;
+        }
+
+        @media (max-width: 960px) {
+            .stats-grid,
+            .layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .shell {
+                padding: 16px 12px 28px;
+                gap: 16px;
             }
 
-            .page {
-                border-radius: 0;
-                border: none;
-                box-shadow: none;
+            .panel {
+                border-radius: 22px;
             }
 
             .hero,
             .section {
-                padding-left: 22px;
-                padding-right: 22px;
+                padding: 20px;
             }
 
-            .hero {
-                padding-left: 22px;
-                padding-right: 22px;
-            }
-
-            .hero-shell,
-            .stats-grid,
-            .nav-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .profile-card,
-            .intro-card,
-            .stat-card,
-            .nav-card {
-                border-radius: 24px;
-            }
-
-            .profile-card {
-                text-align: center;
-            }
-
-            .profile-name {
-                font-size: 2.25rem;
-            }
-
-            .hero-heading {
-                font-size: 1.78rem;
-            }
-
-            .badge-row,
-            .tag-row {
-                justify-content: center;
-            }
-
-            .entry-head,
-            .detail {
-                grid-template-columns: 1fr;
-            }
-
-            .entry-head {
+            .identity {
                 align-items: flex-start;
             }
 
-            .entry-date {
-                white-space: normal;
+            .avatar {
+                width: 96px;
+                height: 96px;
+                border-radius: 20px;
             }
 
-            .grid {
-                grid-template-columns: 1fr;
+            .name {
+                font-size: 2.3rem;
+            }
+
+            .hero-top,
+            .toolbar {
+                align-items: flex-start;
+            }
+
+            .toolbar-actions {
+                width: 100%;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                flex: 1 1 180px;
+            }
+        }
+
+        @media print {
+            body {
+                background: #ffffff;
+            }
+
+            .shell {
+                max-width: none;
+                padding: 0;
+                gap: 16px;
+            }
+
+            .panel {
+                box-shadow: none;
+                background: #ffffff;
+            }
+
+            .toolbar-actions,
+            .toolbar-note {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
-    <main class="page">
-        <section class="hero">
-            <div class="hero-shell">
-                <aside class="profile-card">
-                    <p class="eyebrow">Resume / CV</p>
-                    <h1 class="profile-name">王紫滕</h1>
-                    <p class="profile-role">西安交通大学软件工程本科生</p>
-                    <p class="profile-meta">2023 - 2027 · 机器学习 / 计算机视觉 / 视频理解</p>
-                    <div class="profile-photo">
-                        <img src="./images/photo.jpg" alt="王紫滕的头像" class="avatar">
-                    </div>
-                    <div class="profile-actions">
-                        <a class="action-link" href="./CV.pdf" target="_blank" rel="noopener">查看 PDF 简历</a>
-                        <a class="contact-link" href="mailto:2233711359@stu.xjtu.edu.cn">
-                            <span class="contact-label">邮箱</span>
-                            <span class="contact-value">2233711359@stu.xjtu.edu.cn</span>
-                        </a>
-                        <a class="contact-link" href="tel:+8613258905505">
-                            <span class="contact-label">电话 / 微信</span>
-                            <span class="contact-value">+86 13258905505</span>
-                        </a>
-                    </div>
-                </aside>
+    <main class="shell">
+        <section class="panel">
+            <div class="toolbar">
+                <div class="toolbar-pill">最新中文简历 · 同步版本 2026-03-17</div>
+                <div class="toolbar-actions">
+                    <a class="btn-primary" href="./CV.pdf" target="_blank" rel="noopener">查看 PDF 简历</a>
+                    <button class="btn-secondary" type="button" onclick="window.print()">打印当前页面</button>
+                </div>
+            </div>
+            <p class="toolbar-note">当前网页内容已按最新简历重组，结构参考 nextjs-resume 的信息组织方式，颜色与页面氛围保持当前站点风格。</p>
+        </section>
 
-                <div class="hero-main">
-                    <div class="intro-card">
-                        <p class="eyebrow">Overview</p>
-                        <h2 class="hero-heading">科研、工程实践和产品实现并行推进的本科阶段</h2>
-                        <p class="subtitle">目前就读于西安交通大学软件工程专业，核心经历集中在自动驾驶场景下的视频理解与疲劳驾驶检测，同时持续进行 iOS 独立开发和编译器性能优化实践。</p>
-                        <p class="hero-note">页面顶部先给出身份、阶段与核心方向，下面再用分区展开科研、项目和实习细节，阅读路径会更清楚。</p>
+        <section class="panel hero">
+            <div class="hero-top">
+                <div class="identity">
+                    <img src="./images/photo.jpg" alt="王紫滕的头像" class="avatar">
+                    <div>
+                        <p class="eyebrow">Resume / CV</p>
+                        <h1 class="name">王紫滕</h1>
+                        <p class="school">西安交通大学 · 软件工程（本科）· 2023 级</p>
+                        <p class="intent">保研方向：计算机视觉 / 多模态视频理解 / 系统性能优化</p>
                     </div>
-
-                    <div class="stats-grid">
-                        <article class="stat-card">
-                            <p class="stat-label">当前学校</p>
-                            <p class="stat-value">西安交通大学<br>软件工程</p>
-                        </article>
-                        <article class="stat-card">
-                            <p class="stat-label">学业表现</p>
-                            <p class="stat-value">总智育 90.5<br>大三上排名 3/135</p>
-                        </article>
-                        <article class="stat-card">
-                            <p class="stat-label">近期科研</p>
-                            <p class="stat-value">ECCV 在投<br>视频理解 / MLLM</p>
-                        </article>
-                        <article class="stat-card">
-                            <p class="stat-label">工程项目</p>
-                            <p class="stat-value">XJTU Toolbox iOS<br>SwiftUI 校园工具应用</p>
-                        </article>
+                </div>
+                <div class="contact-list">
+                    <div class="contact-item">
+                        <strong>邮箱</strong>
+                        <a href="mailto:2233711359@stu.xjtu.edu.cn">2233711359@stu.xjtu.edu.cn</a>
                     </div>
-
-                    <div class="nav-grid">
-                        <a class="nav-card" href="#education">
-                            <span class="nav-card-label">Education</span>
-                            <span class="nav-card-title">教育经历</span>
-                            <span class="nav-card-desc">本科阶段、专业信息与智育成绩概览。</span>
-                        </a>
-                        <a class="nav-card" href="#research">
-                            <span class="nav-card-label">Research</span>
-                            <span class="nav-card-title">科研经历</span>
-                            <span class="nav-card-desc">疲劳驾驶检测项目与 ECCV 在投研究。</span>
-                        </a>
-                        <a class="nav-card" href="#projects">
-                            <span class="nav-card-label">Projects</span>
-                            <span class="nav-card-title">项目经历</span>
-                            <span class="nav-card-desc">iOS 独立开发与 Web 全栈开发实践。</span>
-                        </a>
-                        <a class="nav-card" href="#internship">
-                            <span class="nav-card-label">Internship</span>
-                            <span class="nav-card-title">实习经历</span>
-                            <span class="nav-card-desc">华为编译器性能优化与自动化测试经验。</span>
-                        </a>
+                    <div class="contact-item">
+                        <strong>电话</strong>
+                        <a href="tel:+8613258905505">+86 13258905505（微信）</a>
+                    </div>
+                    <div class="contact-item">
+                        <strong>学校</strong>
+                        <span>西安交通大学软件工程本科生，预计 2027 年毕业</span>
                     </div>
                 </div>
             </div>
+
+            <div class="stats-grid">
+                <article class="stat-card">
+                    <p class="stat-label">当前排名</p>
+                    <p class="stat-value">3 / 135<br>大三上智育排名</p>
+                </article>
+                <article class="stat-card">
+                    <p class="stat-label">总智育成绩</p>
+                    <p class="stat-value">90.5</p>
+                </article>
+                <article class="stat-card">
+                    <p class="stat-label">英语能力</p>
+                    <p class="stat-value">CET-4 551<br>CET-6 493</p>
+                </article>
+                <article class="stat-card">
+                    <p class="stat-label">研究方向</p>
+                    <p class="stat-value">CV · VLM · 视频理解 · 系统优化</p>
+                </article>
+            </div>
         </section>
 
-        <section class="section" id="education">
-            <h2 class="section-title">教育经历</h2>
-            <article class="entry">
-                <div class="entry-head">
-                    <div>
-                        <h3 class="entry-title">西安交通大学</h3>
-                        <p class="entry-role">本科生 | 软件工程</p>
+        <section class="layout">
+            <div class="stack">
+                <section class="panel section">
+                    <h2 class="section-title">教育经历</h2>
+                    <div class="education-box">
+                        <p>西安交通大学 · 软件工程本科（2023.09 - 2027.06 预计）</p>
+                        <p>大一智育排名：8/110</p>
+                        <p>大二智育成绩：91.8，排名 6/135（前 5%）</p>
+                        <p>大三上智育成绩：93.3，排名 3/135（前 3%）</p>
+                        <p>总智育成绩：90.5</p>
                     </div>
-                    <div class="entry-date">2023 -- 2027</div>
-                </div>
-                <div class="details">
-                    <div class="detail">
-                        <div class="detail-label">成绩情况</div>
-                        <div class="detail-content">
-                            <ul class="bullet-list">
-                                <li>大一智育排名：8/110</li>
-                                <li>大二智育成绩：91.8，排名：6/135（前 5%）</li>
-                                <li>大三上智育成绩：93.3，排名：3/135（前 3%）</li>
-                                <li>总智育成绩：90.5</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </section>
+                </section>
 
-        <section class="section" id="research">
-            <h2 class="section-title">科研经历</h2>
-
-            <article class="entry">
-                <div class="entry-head">
-                    <div>
-                        <h3 class="entry-title">基于香橙派的疲劳驾驶检测与预警系统</h3>
-                        <p class="entry-role">项目负责人</p>
-                    </div>
-                    <div class="entry-date">2025.5 -- 2026.5</div>
-                </div>
-                <div class="badge-row">
-                    <span class="badge">省级大学生创新创业项目</span>
-                </div>
-                <div class="details">
-                    <div class="detail">
-                        <div class="detail-label">研究背景</div>
-                        <div class="detail-content">
-                            <p>驾驶员疲劳是交通事故的重要诱因，传统检测方法存在延迟高、部署成本高等问题。本项目旨在探索低成本嵌入式平台上基于深度学习的实时疲劳检测方案。</p>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="detail-label">研究方法</div>
-                        <div class="detail-content">
-                            <p>在香橙派开发板上部署轻量化 YOLOv5 模型，对驾驶员面部关键区域进行实时追踪与疲劳状态识别；结合语音模块实现即时预警。模型训练采用公开数据集与迁移学习策略，并通过 ONNX 格式导出以适配嵌入式设备。</p>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="detail-label">阶段成果</div>
-                        <div class="detail-content">
-                            <p>基于 YOLOv5m 的预训练模型和已有数据集完成模型训练与 ONNX 导出，验证集上的 mAP@0.5 达到 95.96%，显著提升了系统的实时识别精度与响应速度。当前正在进行嵌入式部署与性能验证。</p>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="detail-label">承担工作</div>
-                        <div class="detail-content">
-                            <ul class="bullet-list">
-                                <li>负责项目总体设计与小组管理。</li>
-                                <li>主导文献调研、模型改进与训练。</li>
-                                <li>组织实验评估并撰写阶段性技术报告。</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <article class="entry">
-                <div class="entry-head">
-                    <div>
-                        <h3 class="entry-title">Behavioral Intention Stream Understanding from Driving Accident Videos</h3>
-                        <p class="entry-role">IAIR 算法研究实习生</p>
-                    </div>
-                    <div class="entry-date">2026.01 -- 2026.03</div>
-                </div>
-                <div class="badge-row">
-                    <span class="badge">ECCV 在投</span>
-                </div>
-                <div class="details">
-                    <div class="detail">
-                        <div class="detail-label">研究简介</div>
-                        <div class="detail-content">
-                            <p>聚焦自动驾驶安全与视频理解领域，旨在通过分析交通事故视频流，推理交通参与者的行为意图，为系统的安全预警提供多模态算法支持。</p>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="detail-label">技术栈</div>
-                        <div class="detail-content">
-                            <div class="tag-row">
-                                <span class="tag">PyTorch</span>
-                                <span class="tag">VQA</span>
-                                <span class="tag">Video Understanding</span>
-                                <span class="tag">MLLM</span>
-                                <span class="tag">Python</span>
+                <section class="panel section">
+                    <h2 class="section-title">科研经历</h2>
+                    <p class="section-desc">突出研究潜力、实验能力与论文产出。</p>
+                    <div class="card-list">
+                        <article class="experience-card">
+                            <div class="experience-head">
+                                <div>
+                                    <h3 class="experience-title">基于香橙派的疲劳驾驶检测与预警系统</h3>
+                                    <p class="experience-subtitle">省级大学生创新创业项目 · 项目负责人</p>
+                                </div>
+                                <span class="experience-period">2025.05 - 2026.05</span>
                             </div>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="detail-label">承担工作</div>
-                        <div class="detail-content">
-                            <ul class="bullet-list">
-                                <li><strong>参与对比实验与 Baseline 复现：</strong>独立完成 MELA、VideoLLaMA2 和 Alignti 三个视频/多模态 Baseline 模型的环境搭建、代码梳理，并成功在自定义数据集 MMAU 上完成部署与复现。</li>
-                                <li><strong>数据集适配与工程化处理：</strong>针对不同 Baseline 对输入格式的差异化要求，编写脚本完成 MMAU 数据集的自动化清洗、转换与结构化处理，确保对比实验变量的严密控制。</li>
-                                <li><strong>性能评估与验证：</strong>设计并构建标准化测试流水线，系统量化对比各模型在交通事故意图理解任务上的核心指标（Acc），精准定位现有大模型在特定场景下的理解瓶颈。</li>
-                                <li><strong>论文撰写与数据支撑：</strong>将实验结果转化为直观的对比图表与可视化案例，用数据论证本方法相较于竞品的性能优势。</li>
+                            <ul class="experience-points">
+                                <li>在香橙派开发板上部署轻量化 YOLOv5，对驾驶员面部关键区域进行实时追踪与疲劳状态识别。</li>
+                                <li>结合语音模块实现即时预警，采用公开数据集与迁移学习策略完成训练与调优。</li>
+                                <li>完成 ONNX 导出以适配嵌入式设备，并负责总体设计、小组管理、实验评估与阶段报告撰写。</li>
                             </ul>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="detail-label">项目成果</div>
-                        <div class="detail-content">
-                            <p>验证了本方案在 MMAU 数据集上达到 State-of-the-Art，相关成果已整理成学术论文，目前 ECCV 在投。</p>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </section>
+                            <p class="result">成果：基于 YOLOv5m 完成训练与 ONNX 导出，验证集 mAP@0.5 达到 95.96%，当前正在进行嵌入式部署与性能验证。</p>
+                        </article>
 
-        <section class="section" id="projects">
-            <h2 class="section-title">项目经历</h2>
-
-            <article class="entry">
-                <div class="entry-head">
-                    <div>
-                        <h3 class="entry-title">XJTU Toolbox iOS（西交校园工具箱）</h3>
-                        <p class="entry-role">iOS 独立开发者</p>
-                    </div>
-                    <div class="entry-date">2026.2 -- 至今</div>
-                </div>
-                <div class="badge-row">
-                    <span class="badge">个人项目</span>
-                </div>
-                <div class="details">
-                    <div class="detail">
-                        <div class="detail-label">项目简介</div>
-                        <div class="detail-content">
-                            <p>基于 SwiftUI 开发校园工具应用，覆盖课表、成绩、考勤、空教室、图书馆、校园卡、通知等高频场景。</p>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="detail-label">技术栈</div>
-                        <div class="detail-content">
-                            <div class="tag-row">
-                                <span class="tag">Swift</span>
-                                <span class="tag">SwiftUI</span>
-                                <span class="tag">URLSession</span>
+                        <article class="experience-card">
+                            <div class="experience-head">
+                                <div>
+                                    <h3 class="experience-title">Behavioral Intention Stream Understanding from Driving Accident Videos</h3>
+                                    <p class="experience-subtitle">IAIR 算法研究实习生 · ECCV 在投</p>
+                                </div>
+                                <span class="experience-period">2026.01 - 2026.03</span>
                             </div>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="detail-label">承担工作</div>
-                        <div class="detail-content">
-                            <ul class="bullet-list">
-                                <li>设计并实现 <code>App/Core/Modules/Screens</code> 分层架构，完成 14 个功能入口的页面与业务逻辑开发。</li>
-                                <li>实现统一认证体系（CAS + RSA 加密 + Cookie 持久化 + 自动续期），打通 8 套校内系统自动登录链路。</li>
-                                <li>完成多源数据解析与聚合（JSON/HTML 混合解析），实现 25 个通知来源的抓取、去重与分类展示。</li>
-                                <li>实现 WebVPN 地址互转与校内/校外网络自适应，保障图书馆、考勤等内网服务可用。</li>
-                                <li>开发校园卡分析、图书馆座位推荐、付款码（二维码/条码）等核心功能。</li>
+                            <ul class="experience-points">
+                                <li>独立完成 MELA、VideoLLaMA2 和 Alignti 等视频/多模态 Baseline 的环境搭建、代码梳理与部署复现。</li>
+                                <li>编写脚本完成 MMAU 数据集清洗、转换与结构化处理，统一不同 Baseline 的输入格式与实验变量。</li>
+                                <li>构建标准化测试流水线，系统量化各模型在交通事故意图理解任务上的核心指标，并定位理解瓶颈。</li>
+                                <li>将实验结果整理为论文图表与可视化案例，为论文撰写与结果论证提供支撑。</li>
                             </ul>
-                        </div>
+                            <p class="result">成果：方案在 MMAU 数据集上达到 State-of-the-Art，相关论文已整理完成，目前 ECCV 在投。</p>
+                        </article>
                     </div>
-                    <div class="detail">
-                        <div class="detail-label">项目成果</div>
-                        <div class="detail-content">
-                            <p>形成可运行的 iOS 17+ 校园工具应用，支持多系统统一登录与跨模块协同，核心功能覆盖学习、生活与信息服务主流程。</p>
-                        </div>
-                    </div>
-                </div>
-            </article>
+                </section>
 
-            <article class="entry">
-                <div class="entry-head">
-                    <div>
-                        <h3 class="entry-title">音乐推荐系统</h3>
-                        <p class="entry-role">核心小组成员</p>
-                    </div>
-                    <div class="entry-date">2025.7 -- 2025.7</div>
-                </div>
-                <div class="badge-row">
-                    <span class="badge">开发项目</span>
-                </div>
-                <div class="details">
-                    <div class="detail">
-                        <div class="detail-label">项目简介</div>
-                        <div class="detail-content">
-                            <p>开发基于 Web 的音乐推荐平台，支持用户管理、歌曲检索与播放、音乐上传等核心功能，采用前后端分离架构以提升系统扩展性和维护效率。</p>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="detail-label">承担工作</div>
-                        <div class="detail-content">
-                            <ul class="bullet-list">
-                                <li><strong>全栈开发工程师：</strong>设计并实现系统整体架构（Vue3 + Spring Boot + MySQL）。</li>
-                                <li>开发用户交互界面及核心后端服务，保障功能稳定与性能优化。</li>
-                                <li>使用 Git/GitHub 进行代码托管和协作开发。</li>
+                <section class="panel section">
+                    <h2 class="section-title">实习经历</h2>
+                    <p class="section-desc">聚焦性能优化、自动化测试与工程化落地能力。</p>
+                    <div class="card-list">
+                        <article class="experience-card">
+                            <div class="experience-head">
+                                <div>
+                                    <h3 class="experience-title">华为 2012 实验室 · 编译器实验室</h3>
+                                    <p class="experience-subtitle">软件开发工程师（实习生）</p>
+                                </div>
+                                <span class="experience-period">2025.08 - 2025.09</span>
+                            </div>
+                            <ul class="experience-points">
+                                <li>参与编译器 SPEC 子项性能调优，分析运行瓶颈并优化关键路径。</li>
+                                <li>通过 Python 脚本实现自动化性能测试流程，完成一键构建、执行、数据采集与报告生成。</li>
+                                <li>在 Linux 环境结合性能分析工具、日志与监控数据，定位高 CPU 占用与低缓存命中率等问题。</li>
+                                <li>优化性能数据存储与分析流程，自动生成可视化图表，支持团队高效评估优化效果。</li>
                             </ul>
-                        </div>
+                            <p class="result">成果：在 dev-19x 项目中完成 x264 和 Python 子项性能调优，分别提升 9% 和 7%。</p>
+                        </article>
                     </div>
-                    <div class="detail">
-                        <div class="detail-label">项目成果</div>
-                        <div class="detail-content">
-                            <p>小组合作完成核心模块开发，实现系统主要功能。</p>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </section>
+                </section>
 
-        <section class="section" id="internship">
-            <h2 class="section-title">实习经历</h2>
-            <article class="entry">
-                <div class="entry-head">
-                    <div>
-                        <h3 class="entry-title">华为</h3>
-                        <p class="entry-role">实习生 | 2012 实验室 - 编译器实验室 | 软件开发工程师</p>
-                    </div>
-                    <div class="entry-date">2025.8 -- 2025.9</div>
-                </div>
-                <div class="details">
-                    <div class="detail">
-                        <div class="detail-label">工作职责</div>
-                        <div class="detail-content">
-                            <ol class="number-list">
-                                <li>参与性能优化项目，针对编译器 SPEC 子项进行性能调优，分析运行瓶颈并优化关键路径，提升性能。</li>
-                                <li>通过 Python 脚本进行自动化性能测试，实现一键化构建、执行、数据采集与报告生成，显著提高测试效率。</li>
-                                <li>在 Linux 开发环境下，使用性能分析工具，结合日志与监控数据，定位高 CPU 占用与低缓存命中率等问题。</li>
-                                <li>优化性能数据存储与分析流程，通过脚本自动解析运行结果并生成可视化图表，帮助团队高效评估优化效果。</li>
-                                <li>与研发、测试团队协作，确保优化版本在多平台环境下功能正确且性能稳定。</li>
-                            </ol>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="detail-label">工作成果</div>
-                        <div class="detail-content">
-                            <p>参与 dev-19x 项目中的 x264 和 Python 子项性能调优，分别提升 x264 子项性能 9%，Python 子项性能 7%，提升了编译器整体性能与效率。</p>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </section>
+                <section class="panel section">
+                    <h2 class="section-title">项目经历</h2>
+                    <p class="section-desc">强调独立开发、系统设计和完整交付能力。</p>
+                    <div class="card-list">
+                        <article class="experience-card">
+                            <div class="experience-head">
+                                <div>
+                                    <h3 class="experience-title">XJTU Toolbox iOS（西交校园工具箱）</h3>
+                                    <p class="experience-subtitle">个人项目 · iOS 独立开发者</p>
+                                </div>
+                                <span class="experience-period">2026.02 - 至今</span>
+                            </div>
+                            <ul class="experience-points">
+                                <li>基于 SwiftUI 实现 <code>App/Core/Modules/Screens</code> 分层架构，完成 14 个功能入口的页面与业务逻辑开发。</li>
+                                <li>实现统一认证链路（CAS + RSA + Cookie 持久化 + 自动续期），打通 8 套校内系统自动登录流程。</li>
+                                <li>完成 JSON / HTML 多源解析与聚合，实现 25 个通知来源的抓取、去重与分类展示。</li>
+                                <li>实现 WebVPN 地址互转与校内/校外网络自适应，并开发校园卡分析、图书馆座位推荐、付款码等核心功能。</li>
+                            </ul>
+                            <p class="result">成果：形成可运行的 iOS 17+ 校园工具应用，覆盖学习、生活与信息服务主流程。</p>
+                        </article>
 
-        <section class="section">
-            <h2 class="section-title">所获表彰</h2>
-            <div class="grid">
-                <article class="summary-card">
-                    <h3>学生荣誉</h3>
-                    <p>优秀学生，文治书院团委实践部优秀干事，校运动会诸多项目奖项（如跳绳、陆上赛艇等）。</p>
-                </article>
-                <article class="summary-card">
-                    <h3>奖学金</h3>
-                    <p>国家励志奖学金，校级二等奖学金。</p>
-                </article>
+                        <article class="experience-card">
+                            <div class="experience-head">
+                                <div>
+                                    <h3 class="experience-title">音乐推荐系统</h3>
+                                    <p class="experience-subtitle">开发项目 · 核心小组成员</p>
+                                </div>
+                                <span class="experience-period">2025.07</span>
+                            </div>
+                            <ul class="experience-points">
+                                <li>设计并实现 Vue3 + Spring Boot + MySQL 前后端分离架构，支持用户管理、歌曲检索与播放、音乐上传等功能。</li>
+                                <li>负责用户交互界面与核心后端服务开发，兼顾系统稳定性与性能优化。</li>
+                                <li>使用 Git/GitHub 进行代码托管和协作开发，完成小组协同交付。</li>
+                            </ul>
+                            <p class="result">成果：小组合作完成核心模块开发，实现系统主要功能。</p>
+                        </article>
+                    </div>
+                </section>
             </div>
-        </section>
 
-        <section class="section">
-            <h2 class="section-title">专业技能</h2>
-            <div class="grid">
-                <article class="summary-card">
-                    <h3>技术栈</h3>
-                    <div class="tag-row">
-                        <span class="tag">Python</span>
-                        <span class="tag">Shell</span>
-                        <span class="tag">Java</span>
-                        <span class="tag">VUE</span>
-                        <span class="tag">Spring Boot</span>
-                        <span class="tag">Maven</span>
-                        <span class="tag">MySQL</span>
+            <aside class="stack">
+                <section class="panel section">
+                    <h2 class="section-title">拟申请方向</h2>
+                    <ul class="side-list">
+                        <li>计算机视觉：目标检测、视频理解、轻量化模型部署。</li>
+                        <li>多模态大模型在交通场景中的行为意图理解。</li>
+                        <li>系统性能优化：编译器性能分析与工程化工具链。</li>
+                    </ul>
+                </section>
+
+                <section class="panel section">
+                    <h2 class="section-title">荣誉奖项</h2>
+                    <ul class="side-list">
+                        <li>国家励志奖学金</li>
+                        <li>校级二等奖学金</li>
+                        <li>优秀学生</li>
+                        <li>文治书院团委实践部优秀干事</li>
+                        <li>校运动会多项奖项（跳绳、陆上赛艇等）</li>
+                    </ul>
+                </section>
+
+                <section class="panel section">
+                    <h2 class="section-title">技能栈</h2>
+                    <div class="skill-block">
+                        <p><strong>编程语言：</strong>Python / Shell / Java / Swift / Vue</p>
+                        <p><strong>框架工具：</strong>Spring Boot / MySQL / Maven / Git / Docker / PyCharm / IntelliJ IDEA / VS Code</p>
+                        <p><strong>研究与算法：</strong>PyTorch / OpenCV / VQA / Video Understanding / MLLM</p>
+                        <p><strong>英语能力：</strong>CET-4 551，CET-6 493，可进行英文论文阅读与写作</p>
                     </div>
-                </article>
-                <article class="summary-card">
-                    <h3>开发工具与框架</h3>
-                    <div class="tag-row">
-                        <span class="tag">Git</span>
-                        <span class="tag">PyCharm</span>
-                        <span class="tag">Kaggle</span>
-                        <span class="tag">IntelliJ IDEA</span>
-                        <span class="tag">VS Code</span>
-                        <span class="tag">MySQL Workbench</span>
-                        <span class="tag">Docker</span>
-                    </div>
-                </article>
-                <article class="summary-card">
-                    <h3>知识领域</h3>
-                    <div class="tag-row">
-                        <span class="tag">机器学习（ML）</span>
-                        <span class="tag">计算机视觉（CV）</span>
-                        <span class="tag">PyTorch</span>
-                        <span class="tag">OpenCV</span>
-                        <span class="tag">数据结构与算法</span>
-                        <span class="tag">操作系统</span>
-                        <span class="tag">离散数学</span>
-                    </div>
-                </article>
-                <article class="summary-card">
-                    <h3>外语能力</h3>
-                    <p>CET-4 551 分，CET-6 493 分，具备英文文献阅读与撰写能力。</p>
-                </article>
-            </div>
+                </section>
+            </aside>
         </section>
     </main>
 </body>

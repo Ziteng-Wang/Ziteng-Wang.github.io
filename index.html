@@ -48,84 +48,231 @@
         }
 
         .hero {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 32px;
-            align-items: center;
-            padding: 48px 56px 38px;
-            background: linear-gradient(135deg, #fbfdff 0%, #f3f8fb 55%, #eef8f7 100%);
+            padding: 34px 40px 38px;
+            background:
+                linear-gradient(135deg, rgba(251, 253, 255, 0.98) 0%, rgba(241, 248, 251, 0.98) 56%, rgba(235, 247, 245, 0.98) 100%);
             border-bottom: 1px solid var(--line);
         }
 
-        .avatar {
-            width: 172px;
-            height: 172px;
-            border-radius: 26px;
-            object-fit: cover;
-            border: 6px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 0 18px 36px rgba(15, 23, 42, 0.14);
+        .hero-shell {
+            display: grid;
+            grid-template-columns: 308px minmax(0, 1fr);
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .profile-card {
+            padding: 24px;
+            border-radius: 30px;
+            background: linear-gradient(180deg, rgba(244, 251, 251, 0.96) 0%, #ffffff 68%);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
         }
 
         .eyebrow {
-            margin: 0 0 10px;
-            font-size: 0.9rem;
+            margin: 0;
+            font-size: 0.82rem;
             font-weight: 700;
-            letter-spacing: 0.14em;
+            letter-spacing: 0.16em;
             text-transform: uppercase;
             color: var(--accent-strong);
         }
 
-        .hero h1 {
-            margin: 0;
-            font-size: 3rem;
-            line-height: 1.15;
+        .profile-name {
+            margin: 10px 0 0;
+            font-size: 2.7rem;
+            line-height: 1.05;
+            letter-spacing: 0.02em;
         }
 
-        .subtitle {
-            margin: 14px 0 22px;
-            font-size: 1.05rem;
+        .profile-role {
+            margin: 12px 0 0;
+            font-size: 1rem;
             color: var(--muted);
         }
 
-        .chip-row,
-        .action-row,
-        .badge-row,
-        .tag-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
+        .profile-meta {
+            margin: 10px 0 20px;
+            font-size: 0.92rem;
+            color: #466072;
         }
 
-        .chip,
-        .badge,
-        .tag,
+        .profile-photo {
+            margin-bottom: 22px;
+            padding: 12px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.82);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        }
+
+        .avatar {
+            display: block;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: 24px;
+            object-fit: cover;
+            box-shadow: 0 18px 36px rgba(15, 23, 42, 0.12);
+        }
+
+        .profile-actions {
+            display: grid;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
         .action-link {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            min-height: 42px;
-            padding: 10px 14px;
-            border-radius: 999px;
+            min-height: 48px;
+            padding: 12px 18px;
+            border-radius: 18px;
             text-decoration: none;
-            font-size: 0.95rem;
-        }
-
-        .chip {
-            background: #ffffff;
-            border: 1px solid rgba(148, 163, 184, 0.25);
-            color: #314155;
-            box-shadow: 0 10px 24px rgba(148, 163, 184, 0.12);
-        }
-
-        .action-row {
-            margin-top: 16px;
-        }
-
-        .action-link {
+            font-size: 0.98rem;
+            font-weight: 700;
             color: #ffffff;
             background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
             box-shadow: 0 14px 28px rgba(21, 94, 117, 0.22);
+        }
+
+        .contact-link {
+            display: grid;
+            gap: 2px;
+            padding: 13px 16px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid #dfe9ef;
+            text-decoration: none;
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .contact-link:hover,
+        .nav-card:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+        }
+
+        .contact-label {
+            font-size: 0.76rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #6a7a88;
+        }
+
+        .contact-value {
+            font-size: 0.96rem;
+            font-weight: 600;
+            color: #273547;
+            word-break: break-all;
+        }
+
+        .hero-main {
+            display: grid;
+            gap: 18px;
+        }
+
+        .intro-card,
+        .stats-grid .stat-card,
+        .nav-card {
+            background: rgba(255, 255, 255, 0.84);
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            box-shadow: 0 14px 30px rgba(15, 23, 42, 0.06);
+        }
+
+        .intro-card {
+            padding: 24px 26px;
+            border-radius: 28px;
+        }
+
+        .hero-heading {
+            margin: 10px 0 12px;
+            font-size: 2.15rem;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            margin: 0;
+            font-size: 1.03rem;
+            color: var(--muted);
+        }
+
+        .hero-note {
+            margin: 16px 0 0;
+            font-size: 0.96rem;
+            color: #486172;
+        }
+
+        .badge-row,
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .stats-grid,
+        .nav-grid {
+            display: grid;
+            gap: 14px;
+        }
+
+        .stats-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .stat-card {
+            padding: 16px 18px;
+            border-radius: 22px;
+        }
+
+        .stat-label {
+            margin: 0;
+            font-size: 0.76rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #6a7a88;
+        }
+
+        .stat-value {
+            margin: 8px 0 0;
+            font-size: 1.04rem;
+            font-weight: 700;
+            line-height: 1.45;
+            color: #223041;
+        }
+
+        .nav-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .nav-card {
+            display: grid;
+            gap: 8px;
+            padding: 18px 20px;
+            border-radius: 24px;
+            text-decoration: none;
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .nav-card-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent-strong);
+        }
+
+        .nav-card-title {
+            font-size: 1.06rem;
+            font-weight: 700;
+            color: #233243;
+        }
+
+        .nav-card-desc {
+            font-size: 0.92rem;
+            color: #607082;
         }
 
         .section {
@@ -308,14 +455,35 @@
             }
 
             .hero {
-                grid-template-columns: 1fr;
-                justify-items: center;
-                text-align: center;
-                gap: 20px;
+                padding-left: 22px;
+                padding-right: 22px;
             }
 
-            .chip-row,
-            .action-row,
+            .hero-shell,
+            .stats-grid,
+            .nav-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-card,
+            .intro-card,
+            .stat-card,
+            .nav-card {
+                border-radius: 24px;
+            }
+
+            .profile-card {
+                text-align: center;
+            }
+
+            .profile-name {
+                font-size: 2.25rem;
+            }
+
+            .hero-heading {
+                font-size: 1.78rem;
+            }
+
             .badge-row,
             .tag-row {
                 justify-content: center;
@@ -343,24 +511,82 @@
 <body>
     <main class="page">
         <section class="hero">
-            <img src="./images/photo.jpg" alt="王紫滕的头像" class="avatar">
-            <div>
-                <p class="eyebrow">Resume / CV</p>
-                <h1>王紫滕</h1>
-                <p class="subtitle">西安交通大学软件工程本科生，2023 - 2027。总智育成绩 90.5，大三上智育排名 3/135（前 3%）。</p>
-                <div class="chip-row">
-                    <a class="chip" href="mailto:2233711359@stu.xjtu.edu.cn">2233711359@stu.xjtu.edu.cn</a>
-                    <a class="chip" href="tel:+8613258905505">+86 13258905505（微信）</a>
-                    <span class="chip">西安交通大学 · 软件工程</span>
-                    <span class="chip">2023 级 · 2027 毕业</span>
-                </div>
-                <div class="action-row">
-                    <a class="action-link" href="./CV.pdf" target="_blank" rel="noopener">查看 PDF 简历</a>
+            <div class="hero-shell">
+                <aside class="profile-card">
+                    <p class="eyebrow">Resume / CV</p>
+                    <h1 class="profile-name">王紫滕</h1>
+                    <p class="profile-role">西安交通大学软件工程本科生</p>
+                    <p class="profile-meta">2023 - 2027 · 机器学习 / 计算机视觉 / 视频理解</p>
+                    <div class="profile-photo">
+                        <img src="./images/photo.jpg" alt="王紫滕的头像" class="avatar">
+                    </div>
+                    <div class="profile-actions">
+                        <a class="action-link" href="./CV.pdf" target="_blank" rel="noopener">查看 PDF 简历</a>
+                        <a class="contact-link" href="mailto:2233711359@stu.xjtu.edu.cn">
+                            <span class="contact-label">邮箱</span>
+                            <span class="contact-value">2233711359@stu.xjtu.edu.cn</span>
+                        </a>
+                        <a class="contact-link" href="tel:+8613258905505">
+                            <span class="contact-label">电话 / 微信</span>
+                            <span class="contact-value">+86 13258905505</span>
+                        </a>
+                    </div>
+                </aside>
+
+                <div class="hero-main">
+                    <div class="intro-card">
+                        <p class="eyebrow">Overview</p>
+                        <h2 class="hero-heading">科研、工程实践和产品实现并行推进的本科阶段</h2>
+                        <p class="subtitle">目前就读于西安交通大学软件工程专业，核心经历集中在自动驾驶场景下的视频理解与疲劳驾驶检测，同时持续进行 iOS 独立开发和编译器性能优化实践。</p>
+                        <p class="hero-note">页面顶部先给出身份、阶段与核心方向，下面再用分区展开科研、项目和实习细节，阅读路径会更清楚。</p>
+                    </div>
+
+                    <div class="stats-grid">
+                        <article class="stat-card">
+                            <p class="stat-label">当前学校</p>
+                            <p class="stat-value">西安交通大学<br>软件工程</p>
+                        </article>
+                        <article class="stat-card">
+                            <p class="stat-label">学业表现</p>
+                            <p class="stat-value">总智育 90.5<br>大三上排名 3/135</p>
+                        </article>
+                        <article class="stat-card">
+                            <p class="stat-label">近期科研</p>
+                            <p class="stat-value">ECCV 在投<br>视频理解 / MLLM</p>
+                        </article>
+                        <article class="stat-card">
+                            <p class="stat-label">工程项目</p>
+                            <p class="stat-value">XJTU Toolbox iOS<br>SwiftUI 校园工具应用</p>
+                        </article>
+                    </div>
+
+                    <div class="nav-grid">
+                        <a class="nav-card" href="#education">
+                            <span class="nav-card-label">Education</span>
+                            <span class="nav-card-title">教育经历</span>
+                            <span class="nav-card-desc">本科阶段、专业信息与智育成绩概览。</span>
+                        </a>
+                        <a class="nav-card" href="#research">
+                            <span class="nav-card-label">Research</span>
+                            <span class="nav-card-title">科研经历</span>
+                            <span class="nav-card-desc">疲劳驾驶检测项目与 ECCV 在投研究。</span>
+                        </a>
+                        <a class="nav-card" href="#projects">
+                            <span class="nav-card-label">Projects</span>
+                            <span class="nav-card-title">项目经历</span>
+                            <span class="nav-card-desc">iOS 独立开发与 Web 全栈开发实践。</span>
+                        </a>
+                        <a class="nav-card" href="#internship">
+                            <span class="nav-card-label">Internship</span>
+                            <span class="nav-card-title">实习经历</span>
+                            <span class="nav-card-desc">华为编译器性能优化与自动化测试经验。</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="section">
+        <section class="section" id="education">
             <h2 class="section-title">教育经历</h2>
             <article class="entry">
                 <div class="entry-head">
@@ -386,7 +612,7 @@
             </article>
         </section>
 
-        <section class="section">
+        <section class="section" id="research">
             <h2 class="section-title">科研经历</h2>
 
             <article class="entry">
@@ -483,7 +709,7 @@
             </article>
         </section>
 
-        <section class="section">
+        <section class="section" id="projects">
             <h2 class="section-title">项目经历</h2>
 
             <article class="entry">
@@ -573,7 +799,7 @@
             </article>
         </section>
 
-        <section class="section">
+        <section class="section" id="internship">
             <h2 class="section-title">实习经历</h2>
             <article class="entry">
                 <div class="entry-head">

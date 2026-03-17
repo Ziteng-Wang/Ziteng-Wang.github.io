@@ -17,17 +17,12 @@
             --accent: #0f766e;
             --accent-strong: #155e75;
             --accent-soft: rgba(15, 118, 110, 0.08);
-            --accent-ring: rgba(21, 94, 117, 0.14);
             --shadow-lg: 0 20px 48px rgba(15, 23, 42, 0.10);
             --shadow-sm: 0 10px 24px rgba(15, 23, 42, 0.06);
         }
 
         * {
             box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
         }
 
         body {
@@ -74,73 +69,67 @@
             backdrop-filter: blur(8px);
         }
 
-        .toolbar {
+        .hero {
+            padding: 24px 30px 30px;
+        }
+
+        .hero-toolbar {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
             gap: 16px;
-            padding: 18px 22px 14px;
         }
 
-        .toolbar-pill {
+        .lang-switch {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            padding: 7px 12px;
+            gap: 4px;
+            padding: 4px;
             border-radius: 999px;
-            background: var(--surface-soft);
             border: 1px solid var(--border);
-            color: #466072;
-            font-size: 0.9rem;
+            background: var(--surface-soft);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.68);
+        }
+
+        .lang-btn {
+            min-height: 36px;
+            padding: 0 14px;
+            border: none;
+            border-radius: 999px;
+            background: transparent;
+            color: var(--muted);
+            font-size: 0.92rem;
             font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
         }
 
-        .toolbar-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
+        .lang-btn:hover {
+            transform: translateY(-1px);
         }
 
-        .btn-primary,
-        .btn-secondary {
+        .lang-btn.is-active {
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
+            box-shadow: 0 10px 20px rgba(21, 94, 117, 0.16);
+        }
+
+        .btn-primary {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             min-height: 42px;
-            padding: 10px 16px;
+            padding: 10px 18px;
             border-radius: 999px;
-            border: 1px solid transparent;
-            cursor: pointer;
-            transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
-        }
-
-        .btn-primary:hover,
-        .btn-secondary:hover {
-            transform: translateY(-1px);
-        }
-
-        .btn-primary {
             color: #ffffff;
             background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
             box-shadow: 0 12px 24px rgba(21, 94, 117, 0.20);
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
         }
 
-        .btn-secondary {
-            color: #355066;
-            background: #ffffff;
-            border-color: var(--border);
-        }
-
-        .toolbar-note {
-            margin: 0;
-            padding: 0 22px 20px;
-            color: var(--muted);
-            font-size: 0.86rem;
-        }
-
-        .hero {
-            padding: 30px;
+        .btn-primary:hover {
+            transform: translateY(-1px);
         }
 
         .hero-top {
@@ -149,6 +138,7 @@
             align-items: center;
             justify-content: space-between;
             gap: 24px;
+            margin-top: 22px;
         }
 
         .identity {
@@ -199,7 +189,8 @@
         .contact-list {
             display: grid;
             gap: 12px;
-            min-width: 280px;
+            min-width: 300px;
+            max-width: 460px;
         }
 
         .contact-item {
@@ -433,6 +424,11 @@
                 padding: 20px;
             }
 
+            .hero-toolbar,
+            .hero-top {
+                align-items: flex-start;
+            }
+
             .identity {
                 align-items: flex-start;
             }
@@ -445,20 +441,6 @@
 
             .name {
                 font-size: 2.3rem;
-            }
-
-            .hero-top,
-            .toolbar {
-                align-items: flex-start;
-            }
-
-            .toolbar-actions {
-                width: 100%;
-            }
-
-            .btn-primary,
-            .btn-secondary {
-                flex: 1 1 180px;
             }
         }
 
@@ -478,8 +460,7 @@
                 background: #ffffff;
             }
 
-            .toolbar-actions,
-            .toolbar-note {
+            .hero-toolbar {
                 display: none;
             }
         }
@@ -487,60 +468,57 @@
 </head>
 <body>
     <main class="shell">
-        <section class="panel">
-            <div class="toolbar">
-                <div class="toolbar-pill">最新中文简历 · 同步版本 2026-03-17</div>
-                <div class="toolbar-actions">
-                    <a class="btn-primary" href="./CV.pdf" target="_blank" rel="noopener">查看 PDF 简历</a>
-                    <button class="btn-secondary" type="button" onclick="window.print()">打印当前页面</button>
-                </div>
-            </div>
-            <p class="toolbar-note">当前网页内容已按最新简历重组，结构参考 nextjs-resume 的信息组织方式，颜色与页面氛围保持当前站点风格。</p>
-        </section>
-
         <section class="panel hero">
+            <div class="hero-toolbar">
+                <div class="lang-switch" aria-label="Language switch">
+                    <button class="lang-btn is-active" type="button" data-lang="zh" aria-pressed="true">中文</button>
+                    <button class="lang-btn" type="button" data-lang="en" aria-pressed="false">English</button>
+                </div>
+                <a class="btn-primary" id="pdf-link" href="./CV.pdf" target="_blank" rel="noopener">查看 PDF 简历</a>
+            </div>
+
             <div class="hero-top">
                 <div class="identity">
                     <img src="./images/photo.jpg" alt="王紫滕的头像" class="avatar">
                     <div>
-                        <p class="eyebrow">Resume / CV</p>
-                        <h1 class="name">王紫滕</h1>
-                        <p class="school">西安交通大学 · 软件工程（本科）· 2023 级</p>
-                        <p class="intent">保研方向：计算机视觉 / 多模态视频理解 / 系统性能优化</p>
+                        <p class="eyebrow" id="eyebrow">Resume / CV</p>
+                        <h1 class="name" id="name">王紫滕</h1>
+                        <p class="school" id="school">西安交通大学 · 软件工程（本科）· 2023 级</p>
+                        <p class="intent" id="intent">保研方向：计算机视觉 / 多模态视频理解 / 系统性能优化</p>
                     </div>
                 </div>
                 <div class="contact-list">
                     <div class="contact-item">
-                        <strong>邮箱</strong>
-                        <a href="mailto:2233711359@stu.xjtu.edu.cn">2233711359@stu.xjtu.edu.cn</a>
+                        <strong id="contact-email-label">邮箱</strong>
+                        <a href="mailto:2233711359@stu.xjtu.edu.cn" id="contact-email-value">2233711359@stu.xjtu.edu.cn</a>
                     </div>
                     <div class="contact-item">
-                        <strong>电话</strong>
-                        <a href="tel:+8613258905505">+86 13258905505（微信）</a>
+                        <strong id="contact-phone-label">电话</strong>
+                        <a href="tel:+8613258905505" id="contact-phone-value">+86 13258905505（微信）</a>
                     </div>
                     <div class="contact-item">
-                        <strong>学校</strong>
-                        <span>西安交通大学软件工程本科生，预计 2027 年毕业</span>
+                        <strong id="contact-school-label">学校</strong>
+                        <span id="contact-school-value">西安交通大学软件工程本科生，预计 2027 年毕业</span>
                     </div>
                 </div>
             </div>
 
             <div class="stats-grid">
                 <article class="stat-card">
-                    <p class="stat-label">当前排名</p>
-                    <p class="stat-value">3 / 135<br>大三上智育排名</p>
+                    <p class="stat-label" id="stat-rank-label">当前排名</p>
+                    <p class="stat-value" id="stat-rank-value">3 / 135<br>大三上智育排名</p>
                 </article>
                 <article class="stat-card">
-                    <p class="stat-label">总智育成绩</p>
-                    <p class="stat-value">90.5</p>
+                    <p class="stat-label" id="stat-score-label">总智育成绩</p>
+                    <p class="stat-value" id="stat-score-value">90.5</p>
                 </article>
                 <article class="stat-card">
-                    <p class="stat-label">英语能力</p>
-                    <p class="stat-value">CET-4 551<br>CET-6 493</p>
+                    <p class="stat-label" id="stat-english-label">英语能力</p>
+                    <p class="stat-value" id="stat-english-value">CET-4 551<br>CET-6 493</p>
                 </article>
                 <article class="stat-card">
-                    <p class="stat-label">研究方向</p>
-                    <p class="stat-value">CV · VLM · 视频理解 · 系统优化</p>
+                    <p class="stat-label" id="stat-direction-label">研究方向</p>
+                    <p class="stat-value" id="stat-direction-value">CV · VLM · 视频理解 · 系统优化</p>
                 </article>
             </div>
         </section>
@@ -548,150 +526,494 @@
         <section class="layout">
             <div class="stack">
                 <section class="panel section">
-                    <h2 class="section-title">教育经历</h2>
-                    <div class="education-box">
-                        <p>西安交通大学 · 软件工程本科（2023.09 - 2027.06 预计）</p>
-                        <p>大一智育排名：8/110</p>
-                        <p>大二智育成绩：91.8，排名 6/135（前 5%）</p>
-                        <p>大三上智育成绩：93.3，排名 3/135（前 3%）</p>
-                        <p>总智育成绩：90.5</p>
-                    </div>
+                    <h2 class="section-title" id="education-title">教育经历</h2>
+                    <div class="education-box" id="education-box"></div>
                 </section>
 
                 <section class="panel section">
-                    <h2 class="section-title">科研经历</h2>
-                    <p class="section-desc">突出研究潜力、实验能力与论文产出。</p>
-                    <div class="card-list">
-                        <article class="experience-card">
-                            <div class="experience-head">
-                                <div>
-                                    <h3 class="experience-title">基于香橙派的疲劳驾驶检测与预警系统</h3>
-                                    <p class="experience-subtitle">省级大学生创新创业项目 · 项目负责人</p>
-                                </div>
-                                <span class="experience-period">2025.05 - 2026.05</span>
-                            </div>
-                            <ul class="experience-points">
-                                <li>在香橙派开发板上部署轻量化 YOLOv5，对驾驶员面部关键区域进行实时追踪与疲劳状态识别。</li>
-                                <li>结合语音模块实现即时预警，采用公开数据集与迁移学习策略完成训练与调优。</li>
-                                <li>完成 ONNX 导出以适配嵌入式设备，并负责总体设计、小组管理、实验评估与阶段报告撰写。</li>
-                            </ul>
-                            <p class="result">成果：基于 YOLOv5m 完成训练与 ONNX 导出，验证集 mAP@0.5 达到 95.96%，当前正在进行嵌入式部署与性能验证。</p>
-                        </article>
-
-                        <article class="experience-card">
-                            <div class="experience-head">
-                                <div>
-                                    <h3 class="experience-title">Behavioral Intention Stream Understanding from Driving Accident Videos</h3>
-                                    <p class="experience-subtitle">IAIR 算法研究实习生 · ECCV 在投</p>
-                                </div>
-                                <span class="experience-period">2026.01 - 2026.03</span>
-                            </div>
-                            <ul class="experience-points">
-                                <li>独立完成 MELA、VideoLLaMA2 和 Alignti 等视频/多模态 Baseline 的环境搭建、代码梳理与部署复现。</li>
-                                <li>编写脚本完成 MMAU 数据集清洗、转换与结构化处理，统一不同 Baseline 的输入格式与实验变量。</li>
-                                <li>构建标准化测试流水线，系统量化各模型在交通事故意图理解任务上的核心指标，并定位理解瓶颈。</li>
-                                <li>将实验结果整理为论文图表与可视化案例，为论文撰写与结果论证提供支撑。</li>
-                            </ul>
-                            <p class="result">成果：方案在 MMAU 数据集上达到 State-of-the-Art，相关论文已整理完成，目前 ECCV 在投。</p>
-                        </article>
-                    </div>
+                    <h2 class="section-title" id="research-title">科研经历</h2>
+                    <p class="section-desc" id="research-desc">突出研究潜力、实验能力与论文产出。</p>
+                    <div class="card-list" id="research-list"></div>
                 </section>
 
                 <section class="panel section">
-                    <h2 class="section-title">实习经历</h2>
-                    <p class="section-desc">聚焦性能优化、自动化测试与工程化落地能力。</p>
-                    <div class="card-list">
-                        <article class="experience-card">
-                            <div class="experience-head">
-                                <div>
-                                    <h3 class="experience-title">华为 2012 实验室 · 编译器实验室</h3>
-                                    <p class="experience-subtitle">软件开发工程师（实习生）</p>
-                                </div>
-                                <span class="experience-period">2025.08 - 2025.09</span>
-                            </div>
-                            <ul class="experience-points">
-                                <li>参与编译器 SPEC 子项性能调优，分析运行瓶颈并优化关键路径。</li>
-                                <li>通过 Python 脚本实现自动化性能测试流程，完成一键构建、执行、数据采集与报告生成。</li>
-                                <li>在 Linux 环境结合性能分析工具、日志与监控数据，定位高 CPU 占用与低缓存命中率等问题。</li>
-                                <li>优化性能数据存储与分析流程，自动生成可视化图表，支持团队高效评估优化效果。</li>
-                            </ul>
-                            <p class="result">成果：在 dev-19x 项目中完成 x264 和 Python 子项性能调优，分别提升 9% 和 7%。</p>
-                        </article>
-                    </div>
+                    <h2 class="section-title" id="internship-title">实习经历</h2>
+                    <p class="section-desc" id="internship-desc">聚焦性能优化、自动化测试与工程化落地能力。</p>
+                    <div class="card-list" id="internship-list"></div>
                 </section>
 
                 <section class="panel section">
-                    <h2 class="section-title">项目经历</h2>
-                    <p class="section-desc">强调独立开发、系统设计和完整交付能力。</p>
-                    <div class="card-list">
-                        <article class="experience-card">
-                            <div class="experience-head">
-                                <div>
-                                    <h3 class="experience-title">XJTU Toolbox iOS（西交校园工具箱）</h3>
-                                    <p class="experience-subtitle">个人项目 · iOS 独立开发者</p>
-                                </div>
-                                <span class="experience-period">2026.02 - 至今</span>
-                            </div>
-                            <ul class="experience-points">
-                                <li>基于 SwiftUI 实现 <code>App/Core/Modules/Screens</code> 分层架构，完成 14 个功能入口的页面与业务逻辑开发。</li>
-                                <li>实现统一认证链路（CAS + RSA + Cookie 持久化 + 自动续期），打通 8 套校内系统自动登录流程。</li>
-                                <li>完成 JSON / HTML 多源解析与聚合，实现 25 个通知来源的抓取、去重与分类展示。</li>
-                                <li>实现 WebVPN 地址互转与校内/校外网络自适应，并开发校园卡分析、图书馆座位推荐、付款码等核心功能。</li>
-                            </ul>
-                            <p class="result">成果：形成可运行的 iOS 17+ 校园工具应用，覆盖学习、生活与信息服务主流程。</p>
-                        </article>
-
-                        <article class="experience-card">
-                            <div class="experience-head">
-                                <div>
-                                    <h3 class="experience-title">音乐推荐系统</h3>
-                                    <p class="experience-subtitle">开发项目 · 核心小组成员</p>
-                                </div>
-                                <span class="experience-period">2025.07</span>
-                            </div>
-                            <ul class="experience-points">
-                                <li>设计并实现 Vue3 + Spring Boot + MySQL 前后端分离架构，支持用户管理、歌曲检索与播放、音乐上传等功能。</li>
-                                <li>负责用户交互界面与核心后端服务开发，兼顾系统稳定性与性能优化。</li>
-                                <li>使用 Git/GitHub 进行代码托管和协作开发，完成小组协同交付。</li>
-                            </ul>
-                            <p class="result">成果：小组合作完成核心模块开发，实现系统主要功能。</p>
-                        </article>
-                    </div>
+                    <h2 class="section-title" id="projects-title">项目经历</h2>
+                    <p class="section-desc" id="projects-desc">强调独立开发、系统设计和完整交付能力。</p>
+                    <div class="card-list" id="projects-list"></div>
                 </section>
             </div>
 
             <aside class="stack">
                 <section class="panel section">
-                    <h2 class="section-title">拟申请方向</h2>
-                    <ul class="side-list">
-                        <li>计算机视觉：目标检测、视频理解、轻量化模型部署。</li>
-                        <li>多模态大模型在交通场景中的行为意图理解。</li>
-                        <li>系统性能优化：编译器性能分析与工程化工具链。</li>
-                    </ul>
+                    <h2 class="section-title" id="apply-title">拟申请方向</h2>
+                    <ul class="side-list" id="apply-list"></ul>
                 </section>
 
                 <section class="panel section">
-                    <h2 class="section-title">荣誉奖项</h2>
-                    <ul class="side-list">
-                        <li>国家励志奖学金</li>
-                        <li>校级二等奖学金</li>
-                        <li>优秀学生</li>
-                        <li>文治书院团委实践部优秀干事</li>
-                        <li>校运动会多项奖项（跳绳、陆上赛艇等）</li>
-                    </ul>
+                    <h2 class="section-title" id="awards-title">荣誉奖项</h2>
+                    <ul class="side-list" id="awards-list"></ul>
                 </section>
 
                 <section class="panel section">
-                    <h2 class="section-title">技能栈</h2>
-                    <div class="skill-block">
-                        <p><strong>编程语言：</strong>Python / Shell / Java / Swift / Vue</p>
-                        <p><strong>框架工具：</strong>Spring Boot / MySQL / Maven / Git / Docker / PyCharm / IntelliJ IDEA / VS Code</p>
-                        <p><strong>研究与算法：</strong>PyTorch / OpenCV / VQA / Video Understanding / MLLM</p>
-                        <p><strong>英语能力：</strong>CET-4 551，CET-6 493，可进行英文论文阅读与写作</p>
-                    </div>
+                    <h2 class="section-title" id="skills-title">技能栈</h2>
+                    <div class="skill-block" id="skills-block"></div>
                 </section>
             </aside>
         </section>
     </main>
+
+    <script>
+        const content = {
+            zh: {
+                pageTitle: "王紫滕 | 个人简历",
+                actions: {
+                    viewPdf: "查看 PDF 简历"
+                },
+                profile: {
+                    eyebrow: "Resume / CV",
+                    name: "王紫滕",
+                    school: "西安交通大学 · 软件工程（本科）· 2023 级",
+                    intent: "保研方向：计算机视觉 / 多模态视频理解 / 系统性能优化"
+                },
+                contact: {
+                    emailLabel: "邮箱",
+                    emailValue: "2233711359@stu.xjtu.edu.cn",
+                    phoneLabel: "电话",
+                    phoneValue: "+86 13258905505（微信）",
+                    schoolLabel: "学校",
+                    schoolValue: "西安交通大学软件工程本科生，预计 2027 年毕业"
+                },
+                stats: {
+                    rankLabel: "当前排名",
+                    rankValue: "3 / 135<br>大三上智育排名",
+                    scoreLabel: "总智育成绩",
+                    scoreValue: "90.5",
+                    englishLabel: "英语能力",
+                    englishValue: "CET-4 551<br>CET-6 493",
+                    directionLabel: "研究方向",
+                    directionValue: "CV · VLM · 视频理解 · 系统优化"
+                },
+                sections: {
+                    education: "教育经历",
+                    research: "科研经历",
+                    researchDesc: "突出研究潜力、实验能力与论文产出。",
+                    internship: "实习经历",
+                    internshipDesc: "聚焦性能优化、自动化测试与工程化落地能力。",
+                    projects: "项目经历",
+                    projectsDesc: "强调独立开发、系统设计和完整交付能力。",
+                    apply: "拟申请方向",
+                    awards: "荣誉奖项",
+                    skills: "技能栈"
+                },
+                educationBlock: [
+                    "西安交通大学 · 软件工程本科（2023.09 - 2027.06 预计）",
+                    "大一智育排名：8/110",
+                    "大二智育成绩：91.8，排名 6/135（前 5%）",
+                    "大三上智育成绩：93.3，排名 3/135（前 3%）",
+                    "总智育成绩：90.5"
+                ],
+                research: [
+                    {
+                        title: "基于香橙派的疲劳驾驶检测与预警系统",
+                        subtitle: "省级大学生创新创业项目 · 项目负责人",
+                        period: "2025.05 - 2026.05",
+                        points: [
+                            "在香橙派开发板上部署轻量化 YOLOv5，对驾驶员面部关键区域进行实时追踪与疲劳状态识别。",
+                            "结合语音模块实现即时预警，采用公开数据集与迁移学习策略完成训练与调优。",
+                            "完成 ONNX 导出以适配嵌入式设备，并负责总体设计、小组管理、实验评估与阶段报告撰写。"
+                        ],
+                        result: "基于 YOLOv5m 完成训练与 ONNX 导出，验证集 mAP@0.5 达到 95.96%，当前正在进行嵌入式部署与性能验证。"
+                    },
+                    {
+                        title: "Behavioral Intention Stream Understanding from Driving Accident Videos",
+                        subtitle: "IAIR 算法研究实习生 · ECCV 在投",
+                        period: "2026.01 - 2026.03",
+                        points: [
+                            "独立完成 MELA、VideoLLaMA2 和 Alignti 等视频/多模态 Baseline 的环境搭建、代码梳理与部署复现。",
+                            "编写脚本完成 MMAU 数据集清洗、转换与结构化处理，统一不同 Baseline 的输入格式与实验变量。",
+                            "构建标准化测试流水线，系统量化各模型在交通事故意图理解任务上的核心指标，并定位理解瓶颈。",
+                            "将实验结果整理为论文图表与可视化案例，为论文撰写与结果论证提供支撑。"
+                        ],
+                        result: "方案在 MMAU 数据集上达到 State-of-the-Art，相关论文已整理完成，目前 ECCV 在投。"
+                    }
+                ],
+                internship: [
+                    {
+                        title: "华为 2012 实验室 · 编译器实验室",
+                        subtitle: "软件开发工程师（实习生）",
+                        period: "2025.08 - 2025.09",
+                        points: [
+                            "参与编译器 SPEC 子项性能调优，分析运行瓶颈并优化关键路径。",
+                            "通过 Python 脚本实现自动化性能测试流程，完成一键构建、执行、数据采集与报告生成。",
+                            "在 Linux 环境结合性能分析工具、日志与监控数据，定位高 CPU 占用与低缓存命中率等问题。",
+                            "优化性能数据存储与分析流程，自动生成可视化图表，支持团队高效评估优化效果。"
+                        ],
+                        result: "在 dev-19x 项目中完成 x264 和 Python 子项性能调优，分别提升 9% 和 7%。"
+                    }
+                ],
+                projects: [
+                    {
+                        title: "XJTU Toolbox iOS（西交校园工具箱）",
+                        subtitle: "个人项目 · iOS 独立开发者",
+                        period: "2026.02 - 至今",
+                        points: [
+                            "基于 SwiftUI 实现 <code>App/Core/Modules/Screens</code> 分层架构，完成 14 个功能入口的页面与业务逻辑开发。",
+                            "实现统一认证链路（CAS + RSA + Cookie 持久化 + 自动续期），打通 8 套校内系统自动登录流程。",
+                            "完成 JSON / HTML 多源解析与聚合，实现 25 个通知来源的抓取、去重与分类展示。",
+                            "实现 WebVPN 地址互转与校内/校外网络自适应，并开发校园卡分析、图书馆座位推荐、付款码等核心功能。"
+                        ],
+                        result: "形成可运行的 iOS 17+ 校园工具应用，覆盖学习、生活与信息服务主流程。"
+                    },
+                    {
+                        title: "音乐推荐系统",
+                        subtitle: "开发项目 · 核心小组成员",
+                        period: "2025.07",
+                        points: [
+                            "设计并实现 Vue3 + Spring Boot + MySQL 前后端分离架构，支持用户管理、歌曲检索与播放、音乐上传等功能。",
+                            "负责用户交互界面与核心后端服务开发，兼顾系统稳定性与性能优化。",
+                            "使用 Git/GitHub 进行代码托管和协作开发，完成小组协同交付。"
+                        ],
+                        result: "小组合作完成核心模块开发，实现系统主要功能。"
+                    }
+                ],
+                applyDirections: [
+                    "计算机视觉：目标检测、视频理解、轻量化模型部署。",
+                    "多模态大模型在交通场景中的行为意图理解。",
+                    "系统性能优化：编译器性能分析与工程化工具链。"
+                ],
+                awards: [
+                    "国家励志奖学金",
+                    "校级二等奖学金",
+                    "优秀学生",
+                    "文治书院团委实践部优秀干事",
+                    "校运动会多项奖项（跳绳、陆上赛艇等）"
+                ],
+                skills: [
+                    {
+                        label: "编程语言：",
+                        value: "Python / Shell / Java / Swift / Vue"
+                    },
+                    {
+                        label: "框架工具：",
+                        value: "Spring Boot / MySQL / Maven / Git / Docker / PyCharm / IntelliJ IDEA / VS Code"
+                    },
+                    {
+                        label: "研究与算法：",
+                        value: "PyTorch / OpenCV / VQA / Video Understanding / MLLM"
+                    },
+                    {
+                        label: "英语能力：",
+                        value: "CET-4 551，CET-6 493，可进行英文论文阅读与写作"
+                    }
+                ],
+                resultLabel: "成果："
+            },
+            en: {
+                pageTitle: "Ziteng Wang | Resume",
+                actions: {
+                    viewPdf: "View PDF Resume"
+                },
+                profile: {
+                    eyebrow: "Resume / CV",
+                    name: "Ziteng Wang",
+                    school: "Xi'an Jiaotong University · B.Eng. in Software Engineering · Class of 2023",
+                    intent: "Research Interest: Computer Vision / Multimodal Video Understanding / System Performance Optimization"
+                },
+                contact: {
+                    emailLabel: "Email",
+                    emailValue: "2233711359@stu.xjtu.edu.cn",
+                    phoneLabel: "Phone",
+                    phoneValue: "+86 13258905505 (WeChat)",
+                    schoolLabel: "School",
+                    schoolValue: "B.Eng. in Software Engineering at Xi'an Jiaotong University, expected graduation in 2027"
+                },
+                stats: {
+                    rankLabel: "Current Rank",
+                    rankValue: "3 / 135<br>Junior Fall",
+                    scoreLabel: "Overall Score",
+                    scoreValue: "90.5",
+                    englishLabel: "English",
+                    englishValue: "CET-4 551<br>CET-6 493",
+                    directionLabel: "Research Focus",
+                    directionValue: "CV · VLM · Video Understanding · Systems"
+                },
+                sections: {
+                    education: "Education",
+                    research: "Research Experience",
+                    researchDesc: "Emphasizing research output, experimentation, and academic potential.",
+                    internship: "Internship",
+                    internshipDesc: "Focused on performance optimization, automation, and engineering execution.",
+                    projects: "Projects",
+                    projectsDesc: "Highlighting independent development, system design, and delivery ability.",
+                    apply: "Target Research Areas",
+                    awards: "Awards",
+                    skills: "Technical Skills"
+                },
+                educationBlock: [
+                    "Xi'an Jiaotong University · B.Eng. in Software Engineering (2023.09 - 2027.06, Expected)",
+                    "Freshman ranking: 8 / 110",
+                    "Sophomore score: 91.8, rank 6 / 135 (Top 5%)",
+                    "Junior Fall score: 93.3, rank 3 / 135 (Top 3%)",
+                    "Overall academic score: 90.5"
+                ],
+                research: [
+                    {
+                        title: "Orange Pi-based Driver Fatigue Detection and Alert System",
+                        subtitle: "Provincial Innovation Project · Team Lead",
+                        period: "2025.05 - 2026.05",
+                        points: [
+                            "Deployed lightweight YOLOv5 on Orange Pi for real-time facial-region tracking and fatigue recognition.",
+                            "Integrated a voice alert module and trained the model with public datasets and transfer learning.",
+                            "Exported ONNX models for embedded deployment and led overall design, coordination, evaluation, and reporting."
+                        ],
+                        result: "Completed training and ONNX export based on YOLOv5m, achieving mAP@0.5 = 95.96% on the validation set; embedded deployment and profiling are ongoing."
+                    },
+                    {
+                        title: "Behavioral Intention Stream Understanding from Driving Accident Videos",
+                        subtitle: "Algorithm Research Intern · IAIR (ECCV submission)",
+                        period: "2026.01 - 2026.03",
+                        points: [
+                            "Reproduced and deployed strong video/multimodal baselines including MELA, VideoLLaMA2, and Alignti.",
+                            "Built scripts for MMAU dataset cleaning, conversion, and structured adaptation across different input pipelines.",
+                            "Designed a standardized evaluation workflow to compare core intention-understanding metrics in traffic accident scenarios.",
+                            "Converted experimental outputs into publication-ready figures and visual cases to support paper writing."
+                        ],
+                        result: "Reached State-of-the-Art on MMAU; the corresponding paper is currently under ECCV submission."
+                    }
+                ],
+                internship: [
+                    {
+                        title: "Huawei 2012 Labs · Compiler Lab",
+                        subtitle: "Software Development Engineer Intern",
+                        period: "2025.08 - 2025.09",
+                        points: [
+                            "Optimized compiler SPEC sub-benchmarks by identifying bottlenecks and improving critical paths.",
+                            "Built automated performance testing workflows with Python for build, run, data collection, and reporting.",
+                            "Diagnosed high CPU usage and low cache hit-rate issues under Linux profiling environments with logs and monitoring data.",
+                            "Improved analysis pipelines and generated visual reports to support cross-team performance evaluation."
+                        ],
+                        result: "Delivered +9% on x264 and +7% on Python sub-benchmarks in the dev-19x project."
+                    }
+                ],
+                projects: [
+                    {
+                        title: "XJTU Toolbox iOS",
+                        subtitle: "Personal Project · Independent iOS Developer",
+                        period: "2026.02 - Present",
+                        points: [
+                            "Built a layered architecture with <code>App/Core/Modules/Screens</code> in SwiftUI and delivered 14 feature entries.",
+                            "Implemented a unified authentication chain (CAS + RSA + persistent cookies + auto refresh) across 8 campus systems.",
+                            "Handled mixed JSON / HTML parsing and aggregation for 25 notification sources with deduplication and categorization.",
+                            "Implemented WebVPN conversion, adaptive networking, and core features such as campus card analysis and payment codes."
+                        ],
+                        result: "Delivered a runnable iOS 17+ campus utility app covering core study, daily-life, and information-service workflows."
+                    },
+                    {
+                        title: "Music Recommendation System",
+                        subtitle: "Development Project · Core Team Member",
+                        period: "2025.07",
+                        points: [
+                            "Designed and implemented a decoupled architecture using Vue3 + Spring Boot + MySQL.",
+                            "Developed frontend interaction and core backend services with a focus on stability and performance.",
+                            "Collaborated with Git/GitHub for source control and team delivery."
+                        ],
+                        result: "Delivered the core modules and major system functions with the team."
+                    }
+                ],
+                applyDirections: [
+                    "Computer Vision: object detection, video understanding, and lightweight deployment.",
+                    "Multimodal behavior-intention understanding in traffic scenarios.",
+                    "System performance optimization: compiler profiling and engineering toolchains."
+                ],
+                awards: [
+                    "National Encouragement Scholarship",
+                    "University Second-Class Scholarship",
+                    "Outstanding Student",
+                    "Outstanding Student Officer, Wenzhi College",
+                    "Multiple university sports awards (rope skipping, rowing machine, etc.)"
+                ],
+                skills: [
+                    {
+                        label: "Languages: ",
+                        value: "Python / Shell / Java / Swift / Vue"
+                    },
+                    {
+                        label: "Frameworks & Tools: ",
+                        value: "Spring Boot / MySQL / Maven / Git / Docker / PyCharm / IntelliJ IDEA / VS Code"
+                    },
+                    {
+                        label: "Research & ML: ",
+                        value: "PyTorch / OpenCV / VQA / Video Understanding / MLLM"
+                    },
+                    {
+                        label: "English: ",
+                        value: "CET-4 551, CET-6 493; capable of English paper reading and writing"
+                    }
+                ],
+                resultLabel: "Result: "
+            }
+        };
+
+        function setText(id, value) {
+            document.getElementById(id).textContent = value;
+        }
+
+        function setHTML(id, value) {
+            document.getElementById(id).innerHTML = value;
+        }
+
+        function renderParagraphs(containerId, lines) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = "";
+            lines.forEach(function (line) {
+                const p = document.createElement("p");
+                p.textContent = line;
+                container.appendChild(p);
+            });
+        }
+
+        function renderSimpleList(containerId, items) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = "";
+            items.forEach(function (item) {
+                const li = document.createElement("li");
+                li.textContent = item;
+                container.appendChild(li);
+            });
+        }
+
+        function renderSkills(items) {
+            const container = document.getElementById("skills-block");
+            container.innerHTML = "";
+            items.forEach(function (item) {
+                const p = document.createElement("p");
+                const strong = document.createElement("strong");
+                strong.textContent = item.label;
+                p.appendChild(strong);
+                p.appendChild(document.createTextNode(item.value));
+                container.appendChild(p);
+            });
+        }
+
+        function renderExperienceList(containerId, items, resultLabel) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = "";
+
+            items.forEach(function (item) {
+                const article = document.createElement("article");
+                article.className = "experience-card";
+
+                const head = document.createElement("div");
+                head.className = "experience-head";
+
+                const info = document.createElement("div");
+
+                const title = document.createElement("h3");
+                title.className = "experience-title";
+                title.textContent = item.title;
+
+                const subtitle = document.createElement("p");
+                subtitle.className = "experience-subtitle";
+                subtitle.textContent = item.subtitle;
+
+                info.appendChild(title);
+                info.appendChild(subtitle);
+
+                const period = document.createElement("span");
+                period.className = "experience-period";
+                period.textContent = item.period;
+
+                head.appendChild(info);
+                head.appendChild(period);
+
+                const ul = document.createElement("ul");
+                ul.className = "experience-points";
+                item.points.forEach(function (point) {
+                    const li = document.createElement("li");
+                    li.innerHTML = point;
+                    ul.appendChild(li);
+                });
+
+                const result = document.createElement("p");
+                result.className = "result";
+                result.textContent = resultLabel + item.result;
+
+                article.appendChild(head);
+                article.appendChild(ul);
+                article.appendChild(result);
+
+                container.appendChild(article);
+            });
+        }
+
+        function renderLanguage(lang) {
+            const t = content[lang];
+
+            document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+            document.title = t.pageTitle;
+
+            setText("pdf-link", t.actions.viewPdf);
+
+            setText("eyebrow", t.profile.eyebrow);
+            setText("name", t.profile.name);
+            setText("school", t.profile.school);
+            setText("intent", t.profile.intent);
+
+            setText("contact-email-label", t.contact.emailLabel);
+            setText("contact-email-value", t.contact.emailValue);
+            setText("contact-phone-label", t.contact.phoneLabel);
+            setText("contact-phone-value", t.contact.phoneValue);
+            setText("contact-school-label", t.contact.schoolLabel);
+            setText("contact-school-value", t.contact.schoolValue);
+
+            setText("stat-rank-label", t.stats.rankLabel);
+            setHTML("stat-rank-value", t.stats.rankValue);
+            setText("stat-score-label", t.stats.scoreLabel);
+            setHTML("stat-score-value", t.stats.scoreValue);
+            setText("stat-english-label", t.stats.englishLabel);
+            setHTML("stat-english-value", t.stats.englishValue);
+            setText("stat-direction-label", t.stats.directionLabel);
+            setHTML("stat-direction-value", t.stats.directionValue);
+
+            setText("education-title", t.sections.education);
+            setText("research-title", t.sections.research);
+            setText("research-desc", t.sections.researchDesc);
+            setText("internship-title", t.sections.internship);
+            setText("internship-desc", t.sections.internshipDesc);
+            setText("projects-title", t.sections.projects);
+            setText("projects-desc", t.sections.projectsDesc);
+            setText("apply-title", t.sections.apply);
+            setText("awards-title", t.sections.awards);
+            setText("skills-title", t.sections.skills);
+
+            renderParagraphs("education-box", t.educationBlock);
+            renderExperienceList("research-list", t.research, t.resultLabel);
+            renderExperienceList("internship-list", t.internship, t.resultLabel);
+            renderExperienceList("projects-list", t.projects, t.resultLabel);
+            renderSimpleList("apply-list", t.applyDirections);
+            renderSimpleList("awards-list", t.awards);
+            renderSkills(t.skills);
+
+            document.querySelectorAll(".lang-btn").forEach(function (button) {
+                const active = button.dataset.lang === lang;
+                button.classList.toggle("is-active", active);
+                button.setAttribute("aria-pressed", active ? "true" : "false");
+            });
+        }
+
+        document.querySelectorAll(".lang-btn").forEach(function (button) {
+            button.addEventListener("click", function () {
+                renderLanguage(button.dataset.lang);
+            });
+        });
+
+        renderLanguage("zh");
+    </script>
 </body>
 </html>
